@@ -15,6 +15,7 @@ A. Requesting data from the microservice:
     Example  (python):
   
           import requests
+          import json
           response = request.post("localhost:5000/requestImage", json={"topic": "dog"})
 
 B. Receiving data from the microservice:
@@ -22,15 +23,19 @@ B. Receiving data from the microservice:
       Example (python):
   
         import requests
+        import json
         response = request.get("localhost:5000/requestImage")
-        print((response.json)["path"])      # EDIT THIS LATER
+        path = (json.loads(response.json()))["path"]
+        print(path)      
   
 - After sending a POST request as shown above, we can get the response and access the image path as was shown in the GET example:
       Example (python):
   
         import requests
-        response = response = request.post("localhost:5000/requestImage", json={"topic": "dog"})
-        print((response.json)["path"])      # EDIT THIS LATER
+        import json
+        response = request.post("localhost:5000/requestImage", json={"topic": "dog"})
+        path = (json.loads(response.json()))["path"]
+        print(path)
 
 C. UML Sequence Diagram:
 <img width="1438" height="1165" alt="Screenshot 2025-11-17 111739" src="https://github.com/user-attachments/assets/04e5ed52-2654-4551-ab72-0cc868bbda9f" />
