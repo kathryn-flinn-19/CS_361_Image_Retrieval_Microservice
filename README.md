@@ -2,6 +2,11 @@
 
 Communication contract:
 
+Environment setup:
+        
+        python -m pip install requests 
+        
+
 A. Requesting data from the microservice:
 - Send a GET request to localhost:5000/requestImage to get a random image path
 
@@ -25,7 +30,7 @@ B. Receiving data from the microservice:
         import requests
         import json
         response = request.get("localhost:5000/requestImage")
-        path = (json.loads(response.json()))["path"]
+        path = response.text
         print(path)      
   
 - After sending a POST request as shown above, we can get the response and access the image path as was shown in the GET example:
@@ -34,7 +39,7 @@ B. Receiving data from the microservice:
         import requests
         import json
         response = request.post("localhost:5000/requestImage", json={"topic": "dog"})
-        path = (json.loads(response.json()))["path"]
+        path = response.text
         print(path)
 
 C. UML Sequence Diagram:
