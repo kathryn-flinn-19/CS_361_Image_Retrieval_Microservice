@@ -24,7 +24,7 @@ A. Requesting data from the microservice:
           response = request.post("localhost:5000/requestImage", json={"topic": "dog"})
 
 B. Receiving data from the microservice:
-- After sending a GET request as shown above, the response will be stored in response so it can be used later. We can access the image path like so:
+- After sending a GET request as shown above, we can store the response so it can be used later. We can access the image path like so:
       Example (python):
   
         import requests
