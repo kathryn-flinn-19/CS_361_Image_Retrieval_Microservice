@@ -1,9 +1,9 @@
 import os
 import random
-from flask import Flask, request
+from flask import Flask, request 
 
 # checks if the topic exists in the image pool (i.e. if any of the image paths contain
-# the topic)
+# the topic) 
 def topic_exists_in_pool(topic):
     path = "./image-microservice-image-pool"
 
@@ -52,7 +52,7 @@ def choose_image(topic):
 
 app = Flask(__name__)
 
-@app.route("requestImage", methods = ["GET", "POST"])
+@app.route("/requestImage", methods = ["GET", "POST"])
 def getImage():
     if(request.method == "GET"):
         return choose_image("random")
@@ -63,4 +63,4 @@ def getImage():
     return 1
         
 if __name__ == "__main__":
-    app.run(port=5000)
+    app.run(port=5209)
