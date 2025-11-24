@@ -1,5 +1,6 @@
 import os
 import random
+from flask import Flask, request
 
 # checks if the topic exists in the image pool (i.e. if any of the image paths contain
 # the topic)
@@ -46,3 +47,20 @@ def choose_image(topic):
         return choose_random_image()
     else:
         return choose_image_by_topic(topic)
+    
+#Communication code:
+
+app = Flask(__name__)
+
+@app.route("requestImage", methods = ["GET", "POST"])
+def getImage():
+    if(request.method == "GET"):
+        return choose_image("random")
+    elif(request.method == "POST"):
+        return choose_image(
+            request.get_json()["topic"]
+        )
+    return 1
+        
+if __name__ == "__main__":
+    app.run(port=5000)
