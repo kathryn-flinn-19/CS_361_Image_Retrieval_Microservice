@@ -2,10 +2,11 @@ import os
 import random
 from flask import Flask, request
 
+path = "./image-microservice-image-pool"
+
 # checks if the topic exists in the image pool (i.e. if any of the image paths contain
 # the topic)
 def topic_exists_in_pool(topic):
-    path = "./image-microservice-image-pool"
 
     for img in os.listdir(path):
         if topic in img:
@@ -14,11 +15,8 @@ def topic_exists_in_pool(topic):
     return False
 
 
-# chooses random image from the pool
 def choose_random_image():
     images = []
-
-    path = "./image-microservice-image-pool"
 
     for img in os.listdir(path):
         images.append(img)
@@ -30,8 +28,6 @@ def choose_random_image():
 # returns a random image from the pool with that topic
 def choose_image_by_topic(topic):
     images_by_topic = []
-
-    path = "./image-microservice-image-pool"
 
     # find all images with matching topic
     for img in os.listdir(path):
@@ -54,9 +50,9 @@ app = Flask(__name__)
 
 @app.route("requestImage", methods = ["GET", "POST"])
 def getImage():
-    if(request.method == "GET"):
+    if request.method == "GET":
         return choose_image("random")
-    elif(request.method == "POST"):
+    elif request.method == "POST":
         return choose_image(
             request.get_json()["topic"]
         )
@@ -64,3 +60,4 @@ def getImage():
         
 if __name__ == "__main__":
     app.run(port=5000)
+
